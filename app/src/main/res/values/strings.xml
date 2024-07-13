@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">News Catalog</string>
+    <string name="default_web_client_id">313367073536-a5h2adloa8irpb1urhr5epjmm63mhr20.apps.googleusercontent.com</string>
 </resources>
