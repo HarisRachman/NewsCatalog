@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -35,7 +36,7 @@ public class NewsAdd extends AppCompatActivity {
     private ImageView imageView;
     private Button saveNews, chooseImage;
     private Uri imageUri;
-
+    private ProgressBar progressBar;
     private FirebaseFirestore dbNews;
     private FirebaseStorage storage;
     private ProgressDialog progressDialog;
@@ -57,6 +58,8 @@ public class NewsAdd extends AppCompatActivity {
         progressDialog = new ProgressDialog(NewsAdd.this);
         progressDialog.setTitle("Loading...");
 
+        progressBar = findViewById(R.id.progressBar);
+
         chooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +78,8 @@ public class NewsAdd extends AppCompatActivity {
                     return;
                 }
 
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
+                progressBar.setVisibility(View.VISIBLE);
 
                 if (imageUri != null) {
                     uploadImageToStorage(newsTitle, newsDesc);
@@ -139,12 +143,13 @@ public class NewsAdd extends AppCompatActivity {
             dbNews.collection("news").document(id)
                     .update(news)
                     .addOnSuccessListener(aVoid -> {
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(NewsAdd.this, "News updated successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(NewsAdd.this, MainActivity.class));
                         finish();
                     })
                     .addOnFailureListener(e -> {
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(NewsAdd.this, "Error updating news: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.w("NewsAdd", "Error updating document", e);
                     });
@@ -152,14 +157,15 @@ public class NewsAdd extends AppCompatActivity {
             dbNews.collection("news")
                     .add(news)
                     .addOnSuccessListener(documentReference -> {
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(NewsAdd.this, "News added successfully", Toast.LENGTH_SHORT).show();
                         title.setText("");
                         desc.setText("");
                         imageView.setImageResource(0);
+                        startActivity(new Intent(NewsAdd.this, MainActivity.class));
                     })
                     .addOnFailureListener(e -> {
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(NewsAdd.this, "Error adding news: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.w("NewsAdd", "Error adding document", e);
                     });

@@ -17,35 +17,35 @@
         android:theme="@style/Theme.NewsCatalog"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.Design"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Theme.Design.NoActionBar"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterActivity"
-            android:theme="@style/Theme.Design.NoActionBar"
-            android:exported="false" />
-        <activity
-            android:name=".NewsDetail"
-            android:theme="@style/Theme.Design.NoActionBar"
-            android:exported="false" />
-        <activity
-            android:name=".NewsAdd"
-            android:theme="@style/Theme.Design"
-            android:exported="false" />
-        <activity
-            android:name=".DefaultActivity"
+            android:name=".SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/Theme.Design">
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".NewsDetail"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".NewsAdd"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light" />
     </application>
 
 </manifest>

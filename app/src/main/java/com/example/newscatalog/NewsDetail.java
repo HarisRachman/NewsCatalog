@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class NewsDetail extends AppCompatActivity {
     Button edit, hapus;
 
     private FirebaseFirestore db;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class NewsDetail extends AppCompatActivity {
         edit = findViewById(R.id.editButton);
         hapus = findViewById(R.id.deleteButton);
         db = FirebaseFirestore.getInstance();
+        progressBar = findViewById(R.id.progressBar);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -59,9 +62,11 @@ public class NewsDetail extends AppCompatActivity {
         hapus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 db.collection("news").document(id)
                         .delete()
                         .addOnSuccessListener(aVoid -> {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(NewsDetail.this, "News deleted successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(NewsDetail.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

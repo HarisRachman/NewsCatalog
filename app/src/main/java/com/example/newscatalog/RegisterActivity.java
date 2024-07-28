@@ -2,16 +2,19 @@ package com.example.newscatalog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,10 +30,13 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText, nameEditText;
-    private Button registerButton;
+    private AppCompatButton signUpBtn;
     private ProgressBar progressBar;
+    private TextView signInBtn;
+    private ImageView passwordIcon;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private boolean passwordShowing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +47,39 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        emailEditText = findViewById(R.id.email);
-        passwordEditText = findViewById(R.id.password);
-        nameEditText = findViewById(R.id.name);
-        registerButton = findViewById(R.id.registerButton);
+        emailEditText = findViewById(R.id.emailET);
+        passwordEditText = findViewById(R.id.passwordET);
+        nameEditText = findViewById(R.id.fullNameET);
+        signUpBtn = findViewById(R.id.signUpBtn);
+        signInBtn = findViewById(R.id.signInBtn);
+        passwordIcon = findViewById(R.id.passwordIcon);
         progressBar = findViewById(R.id.progressBar);
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        passwordIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (passwordShowing) {
+                    passwordShowing = false;
+                    passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    passwordIcon.setImageResource(R.drawable.show_password);
+                } else {
+                    passwordShowing = true;
+                    passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    passwordIcon.setImageResource(R.drawable.hide_password);
+                }
+
+                passwordEditText.setSelection(passwordEditText.length());
+            }
+        });
+
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String email = emailEditText.getText().toString().trim();

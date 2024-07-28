@@ -6,13 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".NewsDetail">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
         tools:context=".NewsDetailActivity">
+
+        <ImageView
+            android:id="@+id/newsImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/newsTitle"
@@ -29,31 +35,41 @@
             android:layout_height="wrap_content"
             android:text="News Subtitle"
             android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
-
-        <ImageView
-            android:id="@+id/newsImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
             android:layout_marginBottom="16dp"/>
 
-        <Button
-            android:id="@+id/editButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Edit"
-            android:background="@color/design_default_color_primary"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="8dp"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="16dp">
 
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="match_parent"
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:background="@color/green"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/red"
+                android:text="Delete"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:background="@color/design_default_color_error"
-            android:textColor="@android:color/white"/>
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" />
 
     </LinearLayout>
 

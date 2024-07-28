@@ -122,18 +122,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        
+
         if (id == R.id.action_logout) {
             mAuth.signOut();
             Toast.makeText(MainActivity.this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, DefaultActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

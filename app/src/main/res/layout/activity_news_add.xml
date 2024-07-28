@@ -40,6 +40,8 @@
             android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/blue"
+            android:textColor="@android:color/white"
             android:text="Pilih Gambar"/>
 
         <Button
@@ -47,7 +49,17 @@
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/green"
+            android:textColor="@android:color/white"
             android:text="Simpan"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" />
 
     </LinearLayout>
 
